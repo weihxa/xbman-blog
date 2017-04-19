@@ -27,7 +27,6 @@ class Article(models.Model):
     )
 
     title = models.CharField(u'标题',max_length=255, unique=True)
-    url = models.CharField(max_length=255, unique=True)
     description = models.TextField(u'描述',)
     body = models.TextField(u'正文',)
     created_time = models.DateTimeField(u'创建时间',auto_now_add=True)

@@ -118,6 +118,9 @@ STATICFILES_DIRS = (
 )
 AUTH_USER_MODEL = 'blog.UserProfile'
 
+MEDIA_URL = '/static/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/upload')
+
 #分页
 PAGINATION_SETTINGS = {
     'PAGE_RANGE_DISPLAYED': 5,

@@ -101,8 +101,8 @@
 {% block body %}
 {% endblock %}
 
-<div style="margin-bottom: 100px;margin-right: 20px;">
-	<button id="scroll-top" class="btn  page-scroll-top " style="float: right;"><i class="glyphicon glyphicon-chevron-up"></i></button>
+<div id="scroll-top2" style="margin-bottom: 100px;margin-right: 20px;position:fixed;right:0;top:85%;display: none">
+	<button id="scroll-top" class="btn  page-scroll-top"><i class="glyphicon glyphicon-chevron-up"></i></button>
 </div>
 
 <footer id="footer">
@@ -110,7 +110,6 @@
         <div class="container">
             <span class="footer__copyright">Copyright @ 2016-2017 魏先森 版权所有</span>
         </div>
-
     </div>
 </footer>
 
@@ -195,6 +194,7 @@
 }
     myEvent(window,'load',function(){
 	var oRTT=document.getElementById('scroll-top');
+	var oRTT2=document.getElementById('scroll-top2');
 	var pH=document.documentElement.clientHeight;
 	var timer=null;
 	var scrollTop;
@@ -202,8 +202,10 @@
 		scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
 		if(scrollTop>=pH){
 			oRTT.style.display='block';
+			oRTT2.style.display='block';
 		}else{
 			oRTT.style.display='none';
+			oRTT2.style.display='none';
 		}
 		return scrollTop;
 	};

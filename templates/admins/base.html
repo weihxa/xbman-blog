@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{% block titel %}XBMAN | 统一登录{% endblock %}</title>
+  <title>{% block titel %}魏先森的博客|做一个有内涵的知识分享者{% endblock %}</title>
   <link rel="icon" href="/static/blog/img/icon.ico" mce_href="dist/img/icon.png" type="image/x-icon">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -116,20 +116,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <ul class="sidebar-menu">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        <li id="indexs"><a href="/admins/index/"><i class="glyphicon glyphicon-home"></i> <span>系统选择</span></a></li>
+        <li id="indexs"><a href="/admins/index/"><i class="glyphicon glyphicon-home"></i> <span>统计展示</span></a></li>
 {#        <li><a href="#"><i class="glyphicon glyphicon-user"></i> <span>用户管理</span></a></li>#}
 
-                        <li class="treeview" id="userli">
-          <a href="#"><i class="glyphicon glyphicon-fire"></i> <span>用户权限</span>
+                        <li class="treeview" id="articleli">
+          <a href="#"><i class="glyphicon glyphicon-fire"></i> <span>博文管理</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu" id="userul">
-            <li id="users" style="margin-left: 40px"><a href="/users/">用户管理</a></li>
-            <li id="page" style="margin-left: 40px"><a href="/authority/">权限管理</a></li>
+          <ul class="treeview-menu" id="articleul">
+            <li id="article" style="margin-left: 40px"><a href="{% url 'addarticle' %}">添加博文</a></li>
+            <li id="articlelist" style="margin-left: 40px"><a href="{% url 'articlelist' %}">博文列表</a></li>
           </ul>
         </li>
+          <li id="links"><a href="{% url 'link' %}" ><i class="glyphicon glyphicon-globe"></i> <span>友情链接</span></a></li>
           <li id="indexn"><a href="/" target="_blank"><i class="glyphicon glyphicon-eye-open"></i> <span>查看站点</span></a></li>
 
       </ul>

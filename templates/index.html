@@ -18,9 +18,7 @@
                             </div>
                             <div class="card__body">
                                 <div id="test-editormd-view{{ article.id }}">
-                        <textarea id="append-test" style="display:none;">
-Django下面有一个特别实用的框架，就是`django-rest-framework`，用它你可以写出更符合`restful`标准的` api`，本篇会通读`django-rest-framework`下的`status`模块来学习`http`返回的状态码是如何定义的，如果你正在写`API`相关的接口，本篇文章对你会有一定的帮助，希望你能够通读下去。
-                </textarea>
+                        <textarea id="append-test" style="display:none;">{{ article.description }}</textarea>
                                 </div>
                                 <div class="blog-more">
                                     <a href="{% url 'article' article.id %}">阅读全文</a>

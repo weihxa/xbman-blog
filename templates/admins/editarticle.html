@@ -1,0 +1,163 @@
+{% extends 'admins/base.html' %}
+{% block link %}
+    <link rel="stylesheet" href="/static/editormd/css/editormd.css"/>
+    <link rel="stylesheet" href="/static/plugins/select2/select2.min.css">
+    <link rel="stylesheet" href="/static/dist/css/AdminLTE.min.css">
+{% endblock %}
+{% block body %}
+
+<section class="content-header">
+            <h1>
+                编辑博文
+            </h1>
+        </section>
+        <section class="content">
+            <div class="row">
+                <form action="{% url 'addarticle' %}" method="post">
+                    {% csrf_token %}
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <input class="form-control input-lg" type="text" name="title" placeholder="文章标题" value="{{ article.title }}">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-1">
+                                    <div class="form-group">
+                                        <select class="form-control" name="status">
+                                            {% if article.status == '0' %}
+                                                <option value="0">发布</option>
+                                                <option value="1">存稿</option>
+                                            {% elif article.status == '1' %}
+                                                <option value="1">存稿</option>
+                                                <option value="0">发布</option>
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <input type="text" class="form-control" name="url" placeholder="URL" value="{{ article.url }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <select class="form-control select2" multiple="multiple" data-placeholder="分类" style="width: 100%;" name="categories">
+                                            {% for category in categories %}
+                                                <option value="{{ category.name }}">{{ category.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <select class="form-control select2" multiple="multiple" data-placeholder="标签" style="width: 100%;" name="tags">
+                                            {% for tag in tags %}
+                                                <option value="{{ tag.name }}">{{ tag.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>已关联的分类</label>
+                                        <input class="form-control" type="text" value="{{ exist_categories }}" name="exist_categories">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>已关联的标签</label>
+                                        <input class="form-control" type="text" value="{{ exist_tag }}" name="exist_tag">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div id="layout">
+                            <div id="editormd"></div>
+                        </div>
+                    </div>
+                    <div class="box-footer" style="background-color: #ecf0f5">
+                        <button type="submit" class="btn btn-primary pull-right btn-lg">保存</button>
+                    </div>
+                    <input style="display: none" type="text" name="id" value="{{ article.id }}">
+                </form>
+            </div>
+        </section>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+			$(document).ready(function(){
+				$('#articleul').addClass("menu-open");
+				$('#article').addClass("active");
+				$('#articleli').addClass("active");
+                $("body").addClass("sidebar-collapse");
+		});
+    </script>
+    <script src="/static/plugins/select2/select2.full.min.js"></script>
+    <script src="/static/editormd/editormd.js"></script>
+    <script type="text/javascript">
+        var Editor;
+        $(function () {
+            $.get('{% url 'getarticleid' %}?aid={{ article.id }}', function (md) {
+                Editor = editormd("editormd", {
+                    width: "100%",
+                    height: 740,
+                    path: '/static/editormd/lib/',
+                    markdown: md,
+                    codeFold: true,
+                    saveHTMLToTextarea: true,
+                    searchReplace: true,
+                    htmlDecode: "style,script,iframe|on*",
+                    emoji: true,
+                    taskList: true,
+                    tocm: true,
+                    tex: true,
+                    flowChart: true,
+                    sequenceDiagram: true,
+                    imageUpload: true,
+                    imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                    imageUploadURL: "/admins/upload/"
+                });
+            });
+            $(".select2").select2();
+        });
+    </script>
+
+{#    <script type="text/javascript">#}
+{#        var Editor;#}
+{#        $(function () {#}
+{#            Editor = editormd("editormd", {#}
+{#                width: "100%",#}
+{#                height: 740,#}
+{#                path: '/static/editormd/lib/',#}
+{#                markdown: '',#}
+{#                codeFold: true,#}
+{#                saveHTMLToTextarea: true,#}
+{#                searchReplace: true,#}
+{#                htmlDecode: "style,script,iframe|on*",#}
+{#                emoji: true,#}
+{#                taskList: true,#}
+{#                tocm: true,#}
+{#                tex: true,#}
+{#                flowChart: true,#}
+{#                sequenceDiagram: true,#}
+{#                imageUpload: true,#}
+{#                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],#}
+{#                imageUploadURL: "/admins/upload/"#}
+{#            });#}
+{#            $(".select2").select2();#}
+{#        });#}
+{#    </script>#}
+{% endblock %}

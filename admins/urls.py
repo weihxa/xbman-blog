@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.decorators.csrf import csrf_exempt
 import views
 
 urlpatterns = [
@@ -23,4 +24,14 @@ urlpatterns = [
     url(r'^logout/$', views.logout,name='logout'),
     url(r'^checkpasswork/', views.checkpasswork,name='adcheckpasswork'),
     url(r'^index/$', views.index,name='adindex'),
+    url(r'^addarticle/$', views.addarticle,name='addarticle'),
+    url(r'^upload/$', csrf_exempt(views.upload),name='upload'),
+    url(r'^addcategories/$', views.addcategories,name='addcategories'),
+    url(r'^addtags$', views.addtags,name='addtags'),
+    url(r'^articlelist', views.articlelist,name='articlelist'),
+    url(r'^delarticle', views.delarticle,name='delarticle'),
+    url(r'^editarticle', views.editarticle,name='editarticle'),
+    url(r'^getarticleid', views.getarticleid,name='getarticleid'),
+    url(r'^link', views.link,name='link'),
+    url(r'^delink', views.delink,name='delink'),
 ]
