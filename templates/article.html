@@ -21,7 +21,19 @@
                 </textarea>
                     </div>
                 </div>
-
+                <div class="blog__tags">
+                    <span style="margin-bottom: 10px" class="glyphicon glyphicon-fire"> 如果您认为本网站的博文质量不错，读后觉得收获很大，不妨小额赞助我一下，让我有动力继续写出高质量的博文！</span>
+                    <div class="row" style="margin-top: 20px">
+                      <div class="col-xs-6 col-md-6">
+                          <img src="/static/blog/img/wx.png" class="img-rounded">
+                            <h6>微信扫我</h6>
+                      </div>
+                                            <div class="col-xs-6 col-md-6">
+                          <img src="/static/blog/img/zfb.png" class="img-rounded">
+                            <h6>支付宝扫我</h6>
+                      </div>
+                    </div>
+                </div>
                 <div class="blog__tags">
                     {% for tag in article.get_tags %}
                         <a href="{% url 'index' %}?tag={{ tag.name }}" class="tags-list__item">#{{ tag.name }}</a>

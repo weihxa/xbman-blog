@@ -62,7 +62,11 @@ def checkpasswork(request):
 @login_required(login_url='/admins/login/')
 def index(request):
     if request.method == 'GET':
-        return render(request, 'admins/index.html',
+        containerd = {}
+        containerd['brticle'] = blogmodels.Article.objects.all().count()
+        containerd['nobrticle'] = blogmodels.Article.objects.filter(status=1).count()
+        containerd['link'] = blogmodels.Link.objects.all().count()
+        return render(request, 'admins/index.html',{"containerd": containerd,},
                       context_instance=RequestContext(request))
 
 @login_required(login_url='/admins/login/')
@@ -70,7 +74,8 @@ def addarticle(request):
     if request.method == 'GET':
         categories = blogmodels.Categories.objects.all().values('name')
         tags = blogmodels.Tag.objects.all().values('name')
-        return render(request, 'admins/addarticle.html', {'categories': categories, 'tags': tags},
+        series = blogmodels.Series.objects.all()
+        return render(request, 'admins/addarticle.html', {'categories': categories, 'tags': tags,'series':series},
                       context_instance=RequestContext(request))
     elif request.method == 'POST':
         d = dict(request.POST)
@@ -78,6 +83,7 @@ def addarticle(request):
         status = d['status'][0]
         editormd = d['editormd-markdown-doc'][0]
         description = editormd.split('---')[0]
+        series = request.POST.get('series')
         try:
             tags = d['tags']
         except KeyError:
@@ -120,6 +126,9 @@ def addarticle(request):
             for categorie in categories:
                 c = blogmodels.Categories.objects.get(name=categorie)
                 article.categories.add(c)
+        if series:
+            c = blogmodels.Series.objects.get(id=series)
+            article.series = c
         article.save()
         return HttpResponseRedirect("/admins/articlelist/")
 
@@ -200,3 +209,25 @@ def delink(request):
     if request.method == 'POST':
         blogmodels.Link.objects.get(id=request.POST.get('modify')).delete()
         return HttpResponse(json.dumps('true'))
+
+@login_required(login_url='/admins/login/')
+def adminabout(request):
+    if request.method == 'GET':
+        return render(request, 'admins/editabout.html',
+                    context_instance=RequestContext(request))
+    elif request.method == 'POST':
+        try:
+            about = blogmodels.Setting.objects.get()
+            about.body = request.POST.get('editormd-markdown-doc')
+            about.save()
+        except Exception:
+            blogmodels.Setting.objects.create(body=request.POST.get('editormd-markdown-doc')).save()
+        return HttpResponseRedirect("/admins/adminabout/")
+
+@login_required(login_url='/admins/login/')
+def getabout(request):
+    try:
+        article_body = blogmodels.Setting.objects.get().body
+    except Exception:
+        article_body=''
+    return HttpResponse(article_body)

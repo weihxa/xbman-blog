@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^admins/', include('admins.urls')),
     url(r'^$', views.index,name='index'),
     url(r'^article/(?P<article_url>.*)$', views.as_view, name='article'),
+    url(r'^about/$', views.about, name='about'),
 ]

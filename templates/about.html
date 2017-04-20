@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block body %}
+        <section class="section">
+        <div class="container">
+            <article class="card blog">
+                <div class="card__body">
+                    <div id="test-editormd-view2">
+                        <textarea id="append-test" style="display:none;">
+{{ body }}
+                </textarea>
+                    </div>
+                </div>
+                <div class="blog__arthur">
+                    <div class="blog__arthur-contents">
+                        <h2>作者：<a href="#">魏先森</a></h2>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+{% endblock %}
+{% block js %}
+    <script>
+$(function () {
+            var testEditormdView2;
+            testEditormdView2 = editormd.markdownToHTML("test-editormd-view2", {
+                htmlDecode: "style,script,iframe",
+                markdownSourceCode: true,
+                emoji: true,
+                taskList: true,
+                tex: true,
+                flowChart: true,
+                sequenceDiagram: true
+            });
+            $('#ReplyComment').bind('click', AddComment);
+        });
+
+    </script>
+{% endblock %}

@@ -34,4 +34,6 @@ urlpatterns = [
     url(r'^getarticleid', views.getarticleid,name='getarticleid'),
     url(r'^link', views.link,name='link'),
     url(r'^delink', views.delink,name='delink'),
+    url(r'^adminabout', views.adminabout,name='adminabout'),
+    url(r'^getabout', views.getabout,name='getabout'),
 ]

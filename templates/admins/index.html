@@ -3,7 +3,7 @@
 {% endblock %}
 {% block body %}
 
-
+    <div id="containerd" style="min-width: 310px; height: 400px; padding: 20px 0 0 0 "></div>
 {% endblock %}
 
 {% block javascript %}
@@ -12,4 +12,50 @@
 				$('#indexs').addClass("active");
 		});
     </script>
+     <script>
+		$(function () {
+    $('#containerd').highcharts({
+
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: '整体情况概览图'
+        },
+        subtitle: {
+            text: 'form：数据来源于数据库'
+        },
+
+        xAxis: {
+            categories: ['博文总数', '未发布博文数','友链数']
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '数量'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.0f} 个</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            series: {
+                colorByPoint: true
+            }
+        },
+
+        series: [{
+        	name:'数量',
+
+            data: [{{ containerd.brticle }},{{ containerd.nobrticle }},{{ containerd.link }}]
+        }]
+    });
+});
+	</script>
+    <script src="/static/admins/dist/js/highcharts.js"></script>
 {% endblock %}

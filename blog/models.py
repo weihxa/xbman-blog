@@ -19,6 +19,9 @@ class Tag(models.Model):
     def tag_article_count(self):
         return self.article_set.all().count()
 
+class Series(models.Model):
+    name = models.CharField(max_length=32, unique=True)
+    created_time = models.DateTimeField(auto_now_add=True)
 
 class Article(models.Model):
     STATUS_CHOICES = (
@@ -35,6 +38,7 @@ class Article(models.Model):
     read = models.IntegerField(u'阅读数',default=0)
     categories = models.ManyToManyField(Categories,verbose_name=u'分类')
     tag = models.ManyToManyField(Tag,verbose_name=u'标签')
+    series = models.ForeignKey(Series,verbose_name=u'系列',null=True)
 
     def get_tag(self):
         tag = ''
@@ -65,11 +69,4 @@ class Link(models.Model):
 
 
 class Setting(models.Model):
-    title = models.CharField(max_length=80)
-    keywords = models.CharField(max_length=100)
-    description = models.CharField(max_length=200)
-    nickname = models.CharField(max_length=100)
-    avatar = models.ImageField(upload_to='%Y/%m', max_length=100)
-    homedescription = models.CharField(max_length=150)
-    recordinfo = models.CharField(max_length=100)
-    statisticalcode = models.TextField()
+    body = models.TextField(u'博主信息', )

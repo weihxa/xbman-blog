@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/static/blog/vendors/nouislider/distribute/nouislider.min.css">
 
     <!-- Site -->
-    <link rel="stylesheet" href="/static/blog/css/app_1.css">
+    <link rel="stylesheet" href="/static/blog/css/theme{{ theme }}.css">
     <link rel="stylesheet" href="/static/blog/css/app_2.css">
 
     <!-- Page Loader JS -->
@@ -56,45 +56,52 @@
             </ul>
         </div>
     </div>
-
     <div class="header__main">
-        <div class="container">
-            <a class="logo" href="{% url 'index' %}">
-                <!--<img class="glyphicon glyphicon-ice-lolly-tasted" src="" alt="">-->
-                	<div style="display: inline-block;float: left;margin-right: 15px;color: #FFF;">
-{#                		<span class="glyphicon glyphicon-screenshot" style="width: 20px;height: 20px;font-size: 40px;"></span>#}
-                		<img src="/static/blog/img/32.png" style="width: 43px;height: 43px;padding: 0;margin: 0 auto;">
-                	</div>
-
-                <div class="logo__text">
-                    <span>魏先森</span>
-                    <span>Code changes the world!</span>
+    <nav class="navbar" style="margin-bottom: 0">
+      <div class="container">
+          <a class="logo" href="{% url 'index' %}">
+                <div style="display: inline-block;float: left;margin-right: 15px;color: #FFF;">
+                    <img src="/static/blog/img/logo.png" style="width: 43px;height: 43px;padding: 0;margin: 0 auto;">
                 </div>
-            </a>
-
-            <div class="navigation-trigger visible-xs visible-sm" data-rmd-action="block-open" data-rmd-target=".navigation">
-                <i class="zmdi zmdi-menu"></i>
+            <div class="logo__text">
+                <span>魏先森</span>
+                <span>Code changes the world!</span>
             </div>
-            <ul class="navigation">
-                <li class="visible-xs visible-sm"><a class="navigation__close" data-rmd-action="navigation-close" href=""><i class="zmdi zmdi-long-arrow-right"></i></a></li>
-                <li {% if request.path == '/' %} class="active"{% endif %}>
-                    <a href="{% url 'index' %}">首页</a>
-                </li>
-                <li class=" dropdown">
-					  <a class=""  id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					    分类
-					    <span class="caret"></span>
-					  </a>
-					  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-					    <li><a href="#">python教程</a></li>
-					    <li><a href="#">django教程</a></li>
-					  </ul>
-					</li>
-                <li  >
-                    <a href="">关于</a>
-                </li>
-            </ul>
+          </a>
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="glyphicon glyphicon-list" style="color: #fff;font-size: 20px"></span>
+          </button>
         </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right navigations" >
+            <li {% if request.path == '/' %} class="active"{% endif %}>
+                <a href="{% url 'index' %}">首页</a>
+            </li>
+            <li class=" dropdown">
+                  <a class=""  id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    系列
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      {% for item in series %}
+                          <li>
+                                <a href="{% url 'index' %}?series={{ item.name }}" class="list-group-item media">
+                                    {{ item.name }}
+                                </a>
+                          </li>
+                            {% endfor %}
+                  </ul>
+                </li>
+            <li {% if request.path == '/about/' %} class="active"{% endif %}>
+                <a href="{% url 'about' %}">关于</a>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
     </div>
 </header>
 

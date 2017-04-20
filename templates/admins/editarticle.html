@@ -2,7 +2,7 @@
 {% block link %}
     <link rel="stylesheet" href="/static/editormd/css/editormd.css"/>
     <link rel="stylesheet" href="/static/plugins/select2/select2.min.css">
-    <link rel="stylesheet" href="/static/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/static/dist/css/AdminLTE.css">
 {% endblock %}
 {% block body %}
 
@@ -134,30 +134,4 @@
             $(".select2").select2();
         });
     </script>
-
-{#    <script type="text/javascript">#}
-{#        var Editor;#}
-{#        $(function () {#}
-{#            Editor = editormd("editormd", {#}
-{#                width: "100%",#}
-{#                height: 740,#}
-{#                path: '/static/editormd/lib/',#}
-{#                markdown: '',#}
-{#                codeFold: true,#}
-{#                saveHTMLToTextarea: true,#}
-{#                searchReplace: true,#}
-{#                htmlDecode: "style,script,iframe|on*",#}
-{#                emoji: true,#}
-{#                taskList: true,#}
-{#                tocm: true,#}
-{#                tex: true,#}
-{#                flowChart: true,#}
-{#                sequenceDiagram: true,#}
-{#                imageUpload: true,#}
-{#                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],#}
-{#                imageUploadURL: "/admins/upload/"#}
-{#            });#}
-{#            $(".select2").select2();#}
-{#        });#}
-{#    </script>#}
 {% endblock %}
