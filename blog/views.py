@@ -39,8 +39,9 @@ def index(request):
     links = models.Link.objects.all()
     categories = models.Categories.objects.all()
     series = models.Series.objects.all()
-
-    return render(request, 'index.html',{'articles': articles,'links': links,'tags': tags,'categories': categories,'series':series,'theme':utils.setsession(request)},
+    return render(request, 'index.html',{'articles': articles,'links': links,'tags': tags,
+                                         'categories': categories,'series':series,
+                                         'theme':utils.setsession(request)},
                   context_instance=RequestContext(request))
 
 def as_view(request,article_url):
@@ -48,7 +49,8 @@ def as_view(request,article_url):
     article.read += 1
     article.save()
     url = 'http://' + request.get_host() + request.get_full_path()
-    return render(request, 'article.html',{'article': article,"url":url,'theme':utils.setsession(request)},
+    series = models.Series.objects.all()
+    return render(request, 'article.html',{'article': article,"url":url,'series':series,'theme':utils.setsession(request)},
                   context_instance=RequestContext(request))
 
 
@@ -57,5 +59,6 @@ def about(request):
         article_body = models.Setting.objects.get().body
     except Exception:
         article_body = u'####博主很懒什么都没留下:tw-1f33f:！'
-    return render(request, 'about.html', {'body': article_body,'theme':utils.setsession(request)},
+    series = models.Series.objects.all()
+    return render(request, 'about.html', {'body': article_body,'series':series,'theme':utils.setsession(request)},
                   context_instance=RequestContext(request))
