@@ -231,3 +231,9 @@ def getabout(request):
     except Exception:
         article_body=''
     return HttpResponse(article_body)
+
+@login_required(login_url='/admins/login/')
+def addseries(request):
+    if request.method == 'POST':
+        blogmodels.Series.objects.create(name=request.POST.get('series'))
+        return HttpResponseRedirect("/admins/addarticle")
