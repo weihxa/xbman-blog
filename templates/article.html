@@ -2,18 +2,15 @@
 {% block body %}
         <section class="section">
         <div class="container">
-
             <article class="card blog">
                 <div class="card__header">
                     <h1 style="font-size: 19px">{{ article.title }}</h1>
-
                     <small>
                         <span>发布时间：{{ article.created_time }}</span>
                         <span>浏览（{{ article.read }}）</span>
                         <span>分类：{{ article.get_categories }}</span>
                     </small>
                 </div>
-
                 <div class="card__body">
                     <div id="test-editormd-view2">
                         <textarea id="append-test" style="display:none;">
@@ -21,26 +18,32 @@
                 </textarea>
                     </div>
                 </div>
-                <div class="blog__tags">
-                    <span style="margin-bottom: 10px" class="glyphicon glyphicon-fire"> 如果您认为本网站的博文质量不错，读后觉得收获很大，不妨小额赞助我一下，让我有动力继续写出高质量的博文！</span>
-                    <div class="row" style="margin-top: 20px">
-                      <div class="col-xs-6 col-md-6">
-                          <img src="/static/blog/img/wx.png" class="img-rounded">
-                            <h6>微信扫我</h6>
-                      </div>
-                                            <div class="col-xs-6 col-md-6">
-                          <img src="/static/blog/img/zfb.png" class="img-rounded">
-                            <h6>支付宝扫我</h6>
+            <div class="blog__tags">
+                <span style="margin-bottom: 10px;display: block" class="glyphicon glyphicon-fire"> 如果您认为本网站的博文质量不错，读后觉得收获很大，不妨小额赞助我一下，让我有动力继续写出高质量的博文！</span>
+                    <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="margin-bottom: 10px;margin-top: 2px">
+                      打赏
+                    </button>
+                    <div class="collapse" id="collapseExample">
+                      <div class="well">
+                        <div class="row" style="margin-top: 20px">
+                              <div class="col-xs-6 col-md-6">
+                                  <img src="/static/blog/img/wx.png" class="img-rounded">
+                                    <h6>微信扫我</h6>
+                              </div>
+                                <div class="col-xs-6 col-md-6">
+                                  <img src="/static/blog/img/zfb.png" class="img-rounded">
+                                    <h6>支付宝扫我</h6>
+                              </div>
+                            </div>
                       </div>
                     </div>
-                </div>
+            </div>
                 <div class="blog__tags">
                     {% for tag in article.get_tags %}
                         <a href="{% url 'index' %}?tag={{ tag.name }}" class="tags-list__item">#{{ tag.name }}</a>
                     {% endfor %}
 
                 </div>
-
                 <div class="blog__arthur">
                     <div class="blog__arthur-contents">
                         <h2>作者：<a href="#">魏先森</a></h2>
@@ -48,9 +51,6 @@
                     </div>
                 </div>
             </article>
-
-
-
         </div>
     </section>
 {% endblock %}
