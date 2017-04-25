@@ -1,6 +1,25 @@
 #xbman-blog
 一个简单的个人博客，优雅的页面，简单的后台。如丝般顺滑~
 
+###截图：
+
+首页
+
+![首页](https://git.oschina.net/weihaoxuan/images/raw/master/xbman-blog/index.jpg "首页")
+
+关于
+
+![关于](https://git.oschina.net/weihaoxuan/images/raw/master/xbman-blog/about.jpg "关于")
+
+后台
+
+![后台](https://git.oschina.net/weihaoxuan/images/raw/master/xbman-blog/admin.jpg "后台")
+
+添加博文
+
+![添加博文](https://git.oschina.net/weihaoxuan/images/raw/master/xbman-blog/tianjia.jpg "添加博文")
+
+
 部署方法：
     1、部署环境
         python2.7.10+django1.8.3
