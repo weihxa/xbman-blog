@@ -86,13 +86,19 @@
                     <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                      {% for item in series %}
+                    {% if series %}
+                        {% for item in series %}
                           <li>
                                 <a href="{% url 'index' %}?series={{ item.name }}" class="list-group-item media">
                                     {{ item.name }}
                                 </a>
                           </li>
                             {% endfor %}
+                        {% else %}
+                        <a href="#" class="list-group-item media">
+                                    暂无系列！
+                                </a>
+                    {% endif %}
                   </ul>
                 </li>
             <li {% if request.path == '/about/' %} class="active"{% endif %}>
