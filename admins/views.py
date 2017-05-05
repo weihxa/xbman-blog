@@ -237,3 +237,26 @@ def addseries(request):
     if request.method == 'POST':
         blogmodels.Series.objects.create(name=request.POST.get('series'))
         return HttpResponseRedirect("/admins/addarticle")
+
+@login_required(login_url='/admins/login/')
+def adminweixin(request):
+    if request.method == 'GET':
+        Keywords3 =[]
+        Keywords = blogmodels.KeyWord.objects.all()
+        for item in Keywords:
+            Keywords2 = {}
+            Keywords2['id'] = item.id
+            Keywords2['keyword'] = item.keyword
+            Keywords2['content'] = json.loads(item.content)
+            Keywords2['time'] = item.pub_date
+            Keywords3.append(Keywords2)
+        return render(request, 'admins/wechat.html', {'Keywords': Keywords3})
+    if request.method == 'POST':
+        blogmodels.KeyWord.objects.create(keyword=request.POST.get('keyword'), content=json.dumps(request.POST.get('content')))
+    return HttpResponseRedirect("/admins/adminweixin/")
+
+@login_required(login_url='/admins/login/')
+def delwkey(request):
+    if request.method == 'POST':
+        blogmodels.KeyWord.objects.get(id=request.POST.get('modify')).delete()
+        return HttpResponse(json.dumps('true'))

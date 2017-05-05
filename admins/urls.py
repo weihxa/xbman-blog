@@ -37,5 +37,7 @@ urlpatterns = [
     url(r'^adminabout/', views.adminabout,name='adminabout'),
     url(r'^getabout/', views.getabout,name='getabout'),
     url(r'^addseries/$', views.addseries, name='addseries'),
+    url(r'^adminweixin/$', views.adminweixin, name='adminweixin'),
+    url(r'^delwkey/', views.delwkey, name='delwkey'),
 
 ]

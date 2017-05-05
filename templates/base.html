@@ -48,14 +48,24 @@
     <div class="header__top">
         <div class="container">
             <ul class="top-nav">
-
-                <li class="pull-right top-nav__icon">
+<li class="pull-right top-nav__icon">
                     <a href="https://git.oschina.net/weihaoxuan/" target="_blank"><i class="zmdi zmdi-github" title="访问我的github"></i></a>
                 </li>
-
+                <li class="pull-right top-nav__icon">
+                    <a id="weixin" href="#"><i  class="fa fa-wechat" ></i></a>
+                    <div class="row">
+              <div id="sdfsadf" style=" z-index:999;display: none;float: inherit;position: absolute; ">
+                <a href="#" class="thumbnail">
+                  <img src="/static/blog/img/weixiansen.jpg" alt="...">
+                    <span style="text-align:center; display:block;">魏先森订阅号</span>
+                </a>
+              </div>
+            </div>
+                </li>
             </ul>
         </div>
     </div>
+
     <div class="header__main">
     <nav class="navbar" style="margin-bottom: 0">
       <div class="container">
@@ -121,7 +131,7 @@
 <footer id="footer">
     <div class="footer__bottom">
         <div class="container">
-            <span class="footer__copyright">Copyright @ 2016-2017 魏先森 版权所有 {{ Filing.filing }}</span>
+            <span class="footer__copyright">Copyright @ 2016-2017 魏先森 版权所有 {{ Filing.filing }}<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261803612'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1261803612%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></span>
         </div>
     </div>
 </footer>
@@ -229,6 +239,16 @@
 			document.body.scrollTop=scrollTop+speed;
 		}, 3);
 	}
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#weixin").mouseover(function(){
+    $("#sdfsadf").css("display","");
+  });
+  $("#weixin").mouseout(function(){
+    $("#sdfsadf").css("display","none");
+  });
 });
 </script>
 {% block js %}
