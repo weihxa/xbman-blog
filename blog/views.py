@@ -84,13 +84,6 @@ def weixin(request):
         signature = request.GET.get('signature')
         timestamp = request.GET.get('timestamp')
         nonce = request.GET.get('nonce')
-        print nonce
-        if u'教程' in nonce:
-            cc= nonce.encode("utf-8")
-            print cc.strip('教程')
-
-
-
 
         if not wechat_instance.check_signature(
                 signature=signature, timestamp=timestamp, nonce=nonce):
@@ -144,6 +137,6 @@ def weixin(request):
                                   '感谢您的支持！/:rose'
                                   )
         else:
-            reply_text = '/:@)功能还在开发中哦,欢迎老铁提出宝贵意见哦/:heart！访问到我的博客，联系我哦！'
+            reply_text = '/:@)功能还在开发中哦,欢迎老铁提出宝贵意见哦/:heart！访问到【<a href="http://www.xbman.cn"">我的博客</a>】，联系我哦！'
         response = wechat_instance.response_text(content=reply_text)
     return HttpResponse(response, content_type="application/xml")
