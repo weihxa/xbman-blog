@@ -42,7 +42,7 @@ def Obtain_post(request):
     try:
         reply_text = models.wxsetting.objects.get(keyword='关注').content
         reply_text = json.loads(reply_text)
-    except models.KeyWord.DoesNotExist:
+    except Exception:
         reply_text = (
             '哎呀妈呀，老铁你来啦！/:<L>欢迎来到可能是全行业最专业，最权威，博主长的最帅/:B-)，才华横溢的魏先森个人订阅号，在这里我会分享各种技术帖子，咱们一起成长！/:share\n回复【来吧骚年】查看本订阅号支持的全部功能'
             '\n【<a href="http://www.xbman.cn">魏先森的博客</a>】'
@@ -52,22 +52,8 @@ def Obtain_post(request):
     if isinstance(message, TextMessage):
         # 当前会话内容
         content = message.content.strip()
-        # if content == '来吧骚年':
-        #     try:
-        #         reply_text = models.wxsetting.objects.get(keyword='来吧骚年').content
-        #         reply_text = json.loads(reply_text)
-        #     except models.KeyWord.DoesNotExist:
-        #         reply_text = (
-        #             '哈哈，铁子你可以使用如下指令来获取相关信息：\n1. 输入【博客】来查看我的博客\n'
-        #             '2. 关键字查找教程集，例如【python教程】【django教程】\n'
-        #             '还有更多功能正在开发中哦 ^_^\n'
-        #             '【<a href="http://www.xbman.cn"">我的博客</a>】'
-        #         )
-        # elif content == '博客':
-        #     reply_text = '我的博客地址是 http://www.xbman.cn'
         if '教程' in content:
             key = content.strip('教程')
-            # reply_text = models.KeyWord.objects.get(keyword=key).content
             try:
                 keyword_object = models.KeyWord.objects.get(keyword=key)
                 reply_text = keyword_object.content
@@ -85,7 +71,7 @@ def Obtain_post(request):
             try:
                 reply_text = models.wxsetting.objects.get(keyword=content).content
                 reply_text = json.loads(reply_text)
-            except models.KeyWord.DoesNotExist:
+            except Exception:
                 try:
                     reply_text = models.wxreply.objects.order_by('?')[:1]
                     reply_text = json.loads(reply_text[0].content)
