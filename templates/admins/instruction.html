@@ -5,7 +5,7 @@
 {% block body %}
 <section class="content-header">
             <h1>
-                微信关键字
+                指令回复
             </h1>
         </section>
     <!--添加标签-->
@@ -14,18 +14,18 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel">添加关键字</h4>
+                <h4 class="modal-title" id="myModalLabel">添加指令</h4>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal" action="{% url 'adminweixin' %}" method="post" id="createlink">{% csrf_token %}
+                <form class="form-horizontal" action="{% url 'wxinstruction' %}" method="post" id="createlink">{% csrf_token %}
                     <div class="form-group">
-                    <label class="col-lg-2 control-label" for="keyword">关键字:</label>
+                    <label class="col-lg-2 control-label" for="keyword">指令:</label>
                         <div class="col-lg-9">
-                            <input type="text" id="keyword" class="form-control" name="keyword" placeholder="请输入关键字" />
+                            <input type="text" id="keyword" class="form-control" name="keyword" placeholder="请输入指令" />
                         </div>
                 </div>
                     <div class="form-group">
-                    <label class="col-lg-2 control-label" for="content">内容:</label>
+                    <label class="col-lg-2 control-label" for="content">回复内容:</label>
                         <div class="col-lg-9">
                             <textarea  id="content" class="form-control" name="content" style="height: 200px;" placeholder="请输入内容，支持\n和html标签" ></textarea>
                         </div>
@@ -58,7 +58,7 @@
                                         <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>关键字</th>
+                                            <th>指令</th>
                                             <th>内容</th>
                                             <th>创建时间</th>
                                             <th>操作</th>
@@ -105,7 +105,7 @@
 {% block javascript %}
     <script type="text/javascript">
 			$(document).ready(function(){
-				$('#weixin').addClass("active");
+				$('#instruction').addClass("active");
                 $('#weixinul').addClass("menu-open");
 				$('#weixinli').addClass("active");
 		});
@@ -131,9 +131,9 @@
             $("#articleList").DataTable();
         });
     function DeleteLink(id) {
-            if(confirm("确认要删除此关键词，删除后不可恢复哦？")){
+            if(confirm("确认要删除此指令，删除后不可恢复哦？")){
                     $.ajax({
-                        url:'{% url 'delwkey' %}',
+                        url:'{% url 'delinstruction' %}',
                         type:'POST',
                         data:{modify:id},
                         success:function (arg) {

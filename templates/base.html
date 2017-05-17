@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="baidu-site-verification" content="TGrVhU2ANR" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content='魏先森,python,python全栈之路'>
+    <meta name="keywords" content='魏先森,python,python教程,python全栈之路,django,django教程'>
     <meta name="description" content='魏先森的博客，做一个有内涵的知识分享者!'>
 
         <title>{% block title %}魏先森的博客|做一个有内涵的知识分享者{% endblock %}</title>
@@ -93,6 +93,9 @@
           <ul class="nav navbar-nav navbar-right navigations" >
             <li {% if request.path == '/' %} class="active"{% endif %}>
                 <a href="{% url 'index' %}">首页</a>
+            </li>
+          <li {% if request.path == '/s' %} class="active"{% endif %}>
+                <a href="{% url 'index' %}">生活·情感</a>
             </li>
             <li class=" dropdown">
                   <a class=""  id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

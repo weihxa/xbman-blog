@@ -39,5 +39,9 @@ urlpatterns = [
     url(r'^addseries/$', views.addseries, name='addseries'),
     url(r'^adminweixin/$', views.adminweixin, name='adminweixin'),
     url(r'^delwkey/', views.delwkey, name='delwkey'),
+    url(r'^wxreply/', views.wxreply, name='wxreply'),
+    url(r'^delreply/', views.delreply, name='delreply'),
+    url(r'^wxinstruction/', views.wxinstruction, name='wxinstruction'),
+    url(r'^delinstruction/', views.delinstruction, name='delinstruction'),
 
 ]

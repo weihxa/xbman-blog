@@ -5,7 +5,7 @@
 {% block body %}
 <section class="content-header">
             <h1>
-                微信关键字
+                微信随机回复
             </h1>
         </section>
     <!--添加标签-->
@@ -14,16 +14,10 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel">添加关键字</h4>
+                <h4 class="modal-title" id="myModalLabel">添加回复内容</h4>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal" action="{% url 'adminweixin' %}" method="post" id="createlink">{% csrf_token %}
-                    <div class="form-group">
-                    <label class="col-lg-2 control-label" for="keyword">关键字:</label>
-                        <div class="col-lg-9">
-                            <input type="text" id="keyword" class="form-control" name="keyword" placeholder="请输入关键字" />
-                        </div>
-                </div>
+                <form class="form-horizontal" action="{% url 'wxreply' %}" method="post" id="createlink">{% csrf_token %}
                     <div class="form-group">
                     <label class="col-lg-2 control-label" for="content">内容:</label>
                         <div class="col-lg-9">
@@ -51,14 +45,13 @@
                             <div class="box">
                                 <!-- /.box-header -->
                             <div class="box-header">
-                <a href="#myModallink" style="float: right;margin: 0 2px 0 2px;background-color: #f0ad4e;border-color: #eea236;" class="btn btn-sm btn-primary " data-toggle="modal" data-placement="bottom"><span class="glyphicon glyphicon-globe"></span> 添加关键字 </a>
+                <a href="#myModallink" style="float: right;margin: 0 2px 0 2px;background-color: #f0ad4e;border-color: #eea236;" class="btn btn-sm btn-primary " data-toggle="modal" data-placement="bottom"><span class="glyphicon glyphicon-globe"></span> 添加 </a>
             </div>
                                 <div class="box-body">
                                     <table id="articleList" class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>关键字</th>
                                             <th>内容</th>
                                             <th>创建时间</th>
                                             <th>操作</th>
@@ -70,10 +63,6 @@
                                                 <td>
                                                     <span id="LinkDataName{{ link.id }}">{{ link.id }}</span>
                                                     <input id="LinkName{{ link.id}}" style="display: none;width: 100%" value="{{ link.id }}" type="text">
-                                                </td>
-                                                <td>
-                                                    <span id="LinkDataName{{ link.id }}">{{ link.keyword }}</span>
-                                                    <input id="LinkName{{ link.id}}" style="display: none;width: 100%" value="{{ link.keyword }}" type="text">
                                                 </td>
                                                 <td>
                                                     <span id="LinkDataDesc{{ link.id }}">{{ link.content }}</span>
@@ -105,7 +94,7 @@
 {% block javascript %}
     <script type="text/javascript">
 			$(document).ready(function(){
-				$('#weixin').addClass("active");
+				$('#Reply').addClass("active");
                 $('#weixinul').addClass("menu-open");
 				$('#weixinli').addClass("active");
 		});
@@ -131,9 +120,9 @@
             $("#articleList").DataTable();
         });
     function DeleteLink(id) {
-            if(confirm("确认要删除此关键词，删除后不可恢复哦？")){
+            if(confirm("确认要删除此内容，删除后不可恢复哦？")){
                     $.ajax({
-                        url:'{% url 'delwkey' %}',
+                        url:'{% url 'delreply' %}',
                         type:'POST',
                         data:{modify:id},
                         success:function (arg) {

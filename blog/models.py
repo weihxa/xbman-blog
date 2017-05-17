@@ -83,3 +83,26 @@ class KeyWord(models.Model):
     class Meta:
         verbose_name = '微信关键词'
         verbose_name_plural = "微信关键词"
+
+class wxreply(models.Model):
+    content = models.TextField(
+        '内容', null=True, blank=True, help_text='回复内容')
+
+    pub_date = models.DateTimeField('发表时间', auto_now_add=True)
+    update_time = models.DateTimeField('更新时间', auto_now=True, null=True)
+
+    class Meta:
+        verbose_name = '随机回复'
+        verbose_name_plural = "随机回复"
+
+class wxsetting(models.Model):
+    keyword = models.CharField(
+        '指令', max_length=256, help_text='用户发出的指令')
+    content = models.TextField(
+        '内容', null=True, blank=True, help_text='回复给用户的内容')
+
+    pub_date = models.DateTimeField('创建时间', auto_now_add=True)
+
+    class Meta:
+        verbose_name = '微信指令'
+        verbose_name_plural = "微信指令"

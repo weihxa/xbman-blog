@@ -260,3 +260,50 @@ def delwkey(request):
     if request.method == 'POST':
         blogmodels.KeyWord.objects.get(id=request.POST.get('modify')).delete()
         return HttpResponse(json.dumps('true'))
+
+@login_required(login_url='/admins/login/')
+def wxreply(request):
+    if request.method == 'GET':
+        Keywords3 = []
+        Keywords = blogmodels.wxreply.objects.all()
+        for item in Keywords:
+            Keywords2 = {}
+            Keywords2['id'] = item.id
+            Keywords2['content'] = json.loads(item.content)
+            Keywords2['time'] = item.pub_date
+            Keywords3.append(Keywords2)
+        return render(request, 'admins/wxreply.html', {'Keywords': Keywords3})
+    if request.method == 'POST':
+        blogmodels.wxreply.objects.create(content=json.dumps(request.POST.get('content')))
+    return HttpResponseRedirect("/admins/wxreply/")
+
+@login_required(login_url='/admins/login/')
+def delreply(request):
+    if request.method == 'POST':
+        blogmodels.wxreply.objects.get(id=request.POST.get('modify')).delete()
+        return HttpResponse(json.dumps('true'))
+
+@login_required(login_url='/admins/login/')
+def wxinstruction(request):
+    if request.method == 'GET':
+        Keywords3 = []
+        Keywords = blogmodels.wxsetting.objects.all()
+        for item in Keywords:
+            Keywords2 = {}
+            Keywords2['id'] = item.id
+            Keywords2['keyword'] = item.keyword
+            Keywords2['content'] = json.loads(item.content)
+            Keywords2['time'] = item.pub_date
+            Keywords3.append(Keywords2)
+        return render(request, 'admins/instruction.html', {'Keywords': Keywords3})
+    if request.method == 'POST':
+        blogmodels.wxsetting.objects.create(keyword=request.POST.get('keyword'),
+                                          content=json.dumps(request.POST.get('content')))
+    return HttpResponseRedirect("/admins/wxinstruction/")
+
+
+@login_required(login_url='/admins/login/')
+def delinstruction(request):
+    if request.method == 'POST':
+        blogmodels.wxsetting.objects.get(id=request.POST.get('modify')).delete()
+        return HttpResponse(json.dumps('true'))
