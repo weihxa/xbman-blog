@@ -12,6 +12,7 @@
                                 <small>
                                     <span><span style="font-weight: bold">发布时间</span>：{{ article.created_time }}</span>
                                     <span><span style="font-weight: bold">浏览</span>（{{ article.read }}）</span>
+                                    <span><span style="font-weight: bold">评论</span>（<span id = "sourceId::{{ article.id }}" class = "cy_cmt_count" ></span>）</span>
                                     <span><span style="font-weight: bold">分类</span>：{{ article.get_categories }}</span>
                                     <span><span style="font-weight: bold">标签</span>：{{ article.get_tag }}</span>
                                 </small>
@@ -145,4 +146,5 @@
 //          {% endfor %}
         });
     </script>
+    <script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytgiwHpa"></script>
 {% endblock %}
