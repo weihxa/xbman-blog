@@ -13,8 +13,6 @@
                         <span>浏览（{{ article.read }}）</span>
                         <span>评论（<span  id="changyan_count_unit"></span>）</span>
                         <span>分类：{{ article.get_categories }}</span>
-                        <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js">
-                        </script>
                     </small>
                 </div>
                 <div class="card__body">
@@ -98,4 +96,5 @@ $(function () {
         });
 
     </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
 {% endblock %}
