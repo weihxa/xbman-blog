@@ -11,28 +11,41 @@ import django
 from admins import models
 from blog import models as blogmodels
 import json
+import check_code
+from io import BytesIO
 
-
+def create_code_img(request):
+    #在内存中开辟空间用以生成临时的图片
+    f = BytesIO()
+    img,code = check_code.create_code()
+    request.session['check_code'] = code
+    img.save(f,'PNG')
+    return HttpResponse(f.getvalue())
 
 def login(request):
     if request.method == "POST":
-
         username = request.POST.get('email')
         password = request.POST.get('password')
+        code = request.POST.get('code', '')
         user = auth.authenticate(username=username,password=password)
         if user is not None:
             if user.valid_end_time: #设置了end time
                 if django.utils.timezone.now() > user.valid_begin_time and django.utils.timezone.now()  < user.valid_end_time:
                     auth.login(request,user)
-                    request.session.set_expiry(60*30)
-                    return HttpResponseRedirect('/admins/index/')
+                    request.session.set_expiry(600*30)
+                    if code == request.session.get('check_code', 'error'):
+                        return HttpResponseRedirect('/admins/index/')
+                    else:
+                        return render(request, 'admins/login.html', {'login_err': '您输入的验证码错误,请重新输入！'})
                 else:
                     return render(request,'admins/login.html',{'login_err': 'User account is expired,please contact your IT guy for this!'})
             elif django.utils.timezone.now() > user.valid_begin_time:
                     auth.login(request,user)
-                    request.session.set_expiry(60*30)
-                    return HttpResponseRedirect('/admins/index/')
-
+                    request.session.set_expiry(600*30)
+                    if code == request.session.get('check_code', 'error'):
+                        return HttpResponseRedirect('/admins/index/')
+                    else:
+                        return render(request, 'admins/login.html', {'login_err': '您输入的验证码错误,请重新输入！'})
         else:
             return render(request,'admins/login.html',{'login_err': '您输入的用户名或密码错误,请重新输入！'})
     else:

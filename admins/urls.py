@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^login/$', views.login,name='login'),
     url(r'^logout/$', views.logout,name='logout'),
     url(r'^checkpasswork/', views.checkpasswork,name='adcheckpasswork'),
+    url(r'^create_code/$',views.create_code_img,name='create_code'),
     url(r'^index/$', views.index,name='adindex'),
     url(r'^addarticle/$', views.addarticle,name='addarticle'),
     url(r'^upload/$', csrf_exempt(views.upload),name='upload'),

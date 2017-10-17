@@ -57,6 +57,10 @@
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="password" type="password" value="">
                                 </div>
+                                <div class="form-group">
+                                    <input class="form-control" style="width: 50%;display: inline-block" placeholder="验证码" name="code" type="text" value="">
+                                    <img class="" id="check_code_img" src="{% url 'create_code' %}" style="cursor:pointer;width: 40%;display: inline-block;margin: 0 10px 0 10px;float: right" onclick="refresh_check_code(this)">
+                                </div>
                                 <h6 style="color: red;" align="center"><b>{{ login_err }}</b></h6>
                                 <div class="checkbox">
                                     <label>
@@ -137,11 +141,24 @@ $(document).ready(function() {
                         message: '您输入的Email不合法,请重新输入'
                     }
                 }
+            },
+            code: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入正确的验证码！'
+                    },
+                }
             }
         }
     });
 });
 
+</script>
+<script>
+    function refresh_check_code(ths) {
+        ths.src += '?';
+        //src后面加问好会自动刷新验证码img的src
+}
 </script>
 </body>
 
