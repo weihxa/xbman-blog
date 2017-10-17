@@ -32,7 +32,6 @@ def login(request):
             if user.valid_end_time: #设置了end time
                 if django.utils.timezone.now() > user.valid_begin_time and django.utils.timezone.now()  < user.valid_end_time:
                     auth.login(request,user)
-                    request.session.set_expiry(600*30)
                     if code == request.session.get('check_code', 'error'):
                         return HttpResponseRedirect('/admins/index/')
                     else:
@@ -41,7 +40,6 @@ def login(request):
                     return render(request,'admins/login.html',{'login_err': 'User account is expired,please contact your IT guy for this!'})
             elif django.utils.timezone.now() > user.valid_begin_time:
                     auth.login(request,user)
-                    request.session.set_expiry(600*30)
                     if code == request.session.get('check_code', 'error'):
                         return HttpResponseRedirect('/admins/index/')
                     else:

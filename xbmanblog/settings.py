@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'huy-t_kevq^2&c^39h+*-gn1h7$=m1&ur&dt#-@re%yha*^2#)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -104,7 +104,7 @@ USE_TZ = False
 
 LOGIN_URL = '/login/'
 
-SESSION_COOKIE_AGE = 60*60
+SESSION_COOKIE_AGE = 60*120
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 
