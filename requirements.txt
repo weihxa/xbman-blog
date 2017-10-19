@@ -2,3 +2,4 @@ Django==1.8.3
 django-pure-pagination==0.3.0
 Pillow==4.0.0
 gunicorn
+wechat_sdk

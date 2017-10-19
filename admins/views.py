@@ -12,6 +12,7 @@ from admins import models
 from blog import models as blogmodels
 import json
 import check_code
+from blog.user_models import UserProfile
 from io import BytesIO
 
 def create_code_img(request):
@@ -95,6 +96,7 @@ def addarticle(request):
         editormd = d['editormd-markdown-doc'][0]
         description = editormd.split('---')[0]
         series = request.POST.get('series')
+        print request.user
         try:
             tags = d['tags']
         except KeyError:
@@ -140,6 +142,8 @@ def addarticle(request):
         if series:
             c = blogmodels.Series.objects.get(id=series)
             article.series = c
+        users = UserProfile.objects.get(email=str(request.user))
+        article.author = users
         article.save()
         return HttpResponseRedirect("/admins/articlelist/")
 

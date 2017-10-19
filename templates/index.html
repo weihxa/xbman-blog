@@ -10,6 +10,7 @@
                                 <h2><a href="{% url 'article' article.id %}" style="color: #2e353b">{{ article.title }}</a></h2>
 
                                 <small>
+                                    <span><span style="font-weight: bold">作者</span>：<span class="badge label-info">{{ article.author }}</span> </span>
                                     <span><span style="font-weight: bold">发布时间</span>：{{ article.created_time }}</span>
                                     <span><span style="font-weight: bold">浏览</span>（{{ article.read }}）</span>
                                     <span><span style="font-weight: bold">评论</span>（<span id = "sourceId::{{ article.id }}" class = "cy_cmt_count" ></span>）</span>
@@ -27,6 +28,9 @@
                             </div>
                         </article>
                     {% endfor %}
+                <!--广告-->
+                <a data-type="3" data-tmpl="600x90" data-tmplid="193" data-rd="2" data-style="2" data-border="2" href="#"></a>
+                <!--广告结束-->
                     <nav class="text-center">
                         <ul class="pagination">
                             {# 是否有上一页 #}
@@ -73,14 +77,11 @@
                         <small style="color: #9c9c9c">做一个有内涵的知识分享者</small>
                         </a>
                     </div>
-
-
                     <div class="card">
                         <div class="card__header">
                             <h2>分类</h2>
                             <small>Hello，Categories！</small>
                         </div>
-
                         <div class="list-group">
                             {% for category in categories %}
                                 <a href="{% url 'index' %}?category={{ category.name }}" class="list-group-item media">
@@ -122,10 +123,33 @@
                         </div>
 
                     </div>
-
+                <!--广告-->
+<script type="text/javascript">var jd_union_unid="1000244035",jd_ad_ids="536:6",jd_union_pid="CJ6/uvHyKxDDhvrcAxoAIJOn4/UDKgA=";var jd_width='auto';var jd_height=360;var jd_union_euid="";var p="AhMDVhlaFAIUDmVEH0hfIlgRRgYlXVZaCCsfSlpMWGVEH0hfIn48ZglDSWZAN345VV15HVNNE3xGSkFZF2scARoAVB1bEAoiB1QaWhYHFwZXH2slXVZaCCsQewMiWBFGBiUCFgZcGVocABEOVx9YJQMiN2U%3D";</script><script type="text/javascript" charset="utf-8" src="//u-x.jd.com/static/js/auto.js"></script>
+<a data-type="3" data-tmpl="300x250" data-tmplid="126" data-rd="2" data-style="2" data-border="1" href="#"></a>
+<!--广告结束-->
                 </aside>
             </div>
         </div>
+    </div>
+<script type="text/javascript">
+    (function(win,doc){
+        var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
+        if (!win.alimamatk_show) {
+            s.charset = "gbk";
+            s.async = true;
+            s.src = "https://alimama.alicdn.com/tkapi.js";
+            h.insertBefore(s, h.firstChild);
+        };
+        var o = {
+            pid: "mm_54561653_26034128_141896909",/*推广单元ID，用于区分不同的推广渠道*/
+            appkey: "",/*通过TOP平台申请的appkey，设置后引导成交会关联appkey*/
+            unid: "",/*自定义统计字段*/
+            type: "click" /* click 组件的入口标志 （使用click组件必设）*/
+        };
+        win.alimamatk_onload = win.alimamatk_onload || [];
+        win.alimamatk_onload.push(o);
+    })(window,document);
+</script>
     </section>
 {% endblock %}
 

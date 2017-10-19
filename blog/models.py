@@ -39,6 +39,7 @@ class Article(models.Model):
     categories = models.ManyToManyField(Categories,verbose_name=u'分类')
     tag = models.ManyToManyField(Tag,verbose_name=u'标签')
     series = models.ForeignKey(Series,verbose_name=u'系列',null=True)
+    author = models.ForeignKey(UserProfile,verbose_name=u'作者',null=True)
 
     def get_tag(self):
         tag = ''

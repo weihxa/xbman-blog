@@ -24,8 +24,11 @@ def index(request):
         T = models.Tag.objects.get(name=tag)
         articles = articles.filter(tag=T)
     if categories:
-        C = models.Categories.objects.get(name=categories)
-        articles = articles.filter(categories=C)
+        try:
+            C = models.Categories.objects.get(name=categories)
+            articles = articles.filter(categories=C)
+        except Exception,e:
+            pass
     if seriess:
         S = models.Series.objects.get(name=seriess)
         articles = articles.filter(series=S)

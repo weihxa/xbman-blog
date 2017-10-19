@@ -9,6 +9,7 @@
                 <div class="card__header">
                     <h1 style="font-size: 19px">{{ article.title }}</h1>
                     <small>
+                        <span>本文作者：<span class="badge label-info">{{ article.author }}</span></span>
                         <span>发布时间：{{ article.created_time }}</span>
                         <span>浏览（{{ article.read }}）</span>
                         <span>评论（<span  id="changyan_count_unit"></span>）</span>
@@ -25,7 +26,7 @@
             <div class="blog__arthur">
                     <div class="blog__arthur-contents">
                         <div style="float: left;display: inline-block">
-                            <h2>作者：<a href="{% url 'about' %}">魏先森</a></h2>
+                            <h2>本文作者：<a href="{% url 'about' %}">{{ article.author }}</a></h2>
                             <p>转载请标明出处：<a href="{{ url }}">{{ url }}</a></p>
                         </div>
                         <div style="float: right;display: inline-block;text-align: center;">
@@ -59,6 +60,15 @@
                     {% endfor %}
 
                 </div>
+            <div class="blog__tags" >
+                <div style="">
+                    <script type="text/javascript">var jd_union_unid="1000244035",jd_ad_ids="505:6",jd_union_pid="CK2q3vHyKxDDhvrcAxoAIPbl4/UDKgA=";var jd_width=960;var jd_height=90;var jd_union_euid="";var p="AhMDVhlaHAESBWVEH0hfIlgRRgYlXVZaCCsfSlpMWGVEH0hfIlAXQBNDYWEZNVsLfWpXBVdDHF5HQWdZF2scARoAVB1bEAoiB1QaWhYHFwZXH2slXVZaCCsQewMiWBFGBiUCFgZcGVocChIDURpZJQMiN2U%3D";</script><script type="text/javascript" charset="utf-8" src="//u-x.jd.com/static/js/auto.js"></script>
+                </div>
+                <div>
+<a data-type="3" data-tmpl="800x90" data-tmplid="195" data-rd="2" data-style="2" data-border="1" href="#"></a>
+                </div>
+
+            </div>
             <!--PC和WAP自适应版-->
             <div class="blog__tags">
 
@@ -78,6 +88,26 @@
             </article>
         </div>
     </section>
+    </div>
+<script type="text/javascript">
+    (function(win,doc){
+        var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
+        if (!win.alimamatk_show) {
+            s.charset = "gbk";
+            s.async = true;
+            s.src = "https://alimama.alicdn.com/tkapi.js";
+            h.insertBefore(s, h.firstChild);
+        };
+        var o = {
+            pid: "mm_54561653_26034128_141932163",/*推广单元ID，用于区分不同的推广渠道*/
+            appkey: "",/*通过TOP平台申请的appkey，设置后引导成交会关联appkey*/
+            unid: "",/*自定义统计字段*/
+            type: "click" /* click 组件的入口标志 （使用click组件必设）*/
+        };
+        win.alimamatk_onload = win.alimamatk_onload || [];
+        win.alimamatk_onload.push(o);
+    })(window,document);
+</script>
 {% endblock %}
 {% block js %}
     <script>
