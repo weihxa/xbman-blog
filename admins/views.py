@@ -52,12 +52,12 @@ def login(request):
     else:
         return render(request, 'admins/login.html')
 
-@login_required(login_url='/admins/login/')
+@login_required()
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect("/admins/login/")
 
-@login_required(login_url='/admins/login/')
+@login_required
 def checkpasswork(request):
     if request.method=='POST':
         try:
@@ -73,7 +73,7 @@ def checkpasswork(request):
         except AttributeError,e:
             return HttpResponseRedirect("/admins/login/")
 
-@login_required(login_url='/admins/login/')
+@login_required
 def index(request):
     if request.method == 'GET':
         containerd = {}
@@ -83,7 +83,7 @@ def index(request):
         return render(request, 'admins/index.html',{"containerd": containerd,},
                       context_instance=RequestContext(request))
 
-@login_required(login_url='/admins/login/')
+@login_required
 def addarticle(request):
     if request.method == 'GET':
         categories = blogmodels.Categories.objects.all().values('name')
@@ -99,7 +99,6 @@ def addarticle(request):
         editormd = d['editormd-markdown-doc'][0]
         description = editormd.split('---')[0]
         series = request.POST.get('series')
-        print category
         try:
             tags = d['tags']
         except KeyError:
@@ -152,7 +151,7 @@ def addarticle(request):
         article.save()
         return HttpResponseRedirect("/admins/articlelist/")
 
-@login_required(login_url='/admins/login/')
+@login_required
 def upload(request, *args, **kwargs):
     files = request.FILES.get('editormd-image-file', None)
     if files:
@@ -163,20 +162,20 @@ def upload(request, *args, **kwargs):
         result = {'success': 0, 'message': '未获取到文件！'}
     return HttpResponse(json.dumps(result), content_type='application/json')
 
-@login_required(login_url='/admins/login/')
+@login_required
 def addcategories(request):
     if request.POST.get('categories'):
         blogmodels.Categories.objects.create(name=request.POST.get('categories'))
     return HttpResponseRedirect("/admins/addarticle/")
 
 
-@login_required(login_url='/admins/login/')
+@login_required
 def addtags(request):
     if request.POST.get('tags'):
         blogmodels.Tag.objects.create(name=request.POST.get('tags'))
     return HttpResponseRedirect("/admins/addarticle/")
 
-@login_required(login_url='/admins/login/')
+@login_required
 def articlelist(request):
     if request.method == 'GET':
         articles = blogmodels.Article.objects.all().order_by('-id')
@@ -184,13 +183,13 @@ def articlelist(request):
                       context_instance=RequestContext(request))
 
 
-@login_required(login_url='/admins/login/')
+@login_required
 def delarticle(request):
     if request.method == 'POST':
         blogmodels.Article.objects.get(id=request.POST.get('modify')).delete()
         return HttpResponse(json.dumps('true'))
 
-@login_required(login_url='/admins/login/')
+@login_required
 def editarticle(request):
     aid = request.GET.get('aid', '')
     if aid:
@@ -209,13 +208,13 @@ def editarticle(request):
         'exist_tag': exist_tag
     })
 
-@login_required(login_url='/admins/login/')
+@login_required
 def getarticleid( request):
     aid = request.GET.get('aid')
     article_body = blogmodels.Article.objects.get(pk=aid).body
     return HttpResponse(article_body)
 
-@login_required(login_url='/admins/login/')
+@login_required
 def link(request):
     if request.method == 'GET':
         links = blogmodels.Link.objects.all().order_by('-add_time')
@@ -225,13 +224,13 @@ def link(request):
                                        description=request.POST.get('Description'))
     return HttpResponseRedirect("/admins/link/")
 
-@login_required(login_url='/admins/login/')
+@login_required
 def delink(request):
     if request.method == 'POST':
         blogmodels.Link.objects.get(id=request.POST.get('modify')).delete()
         return HttpResponse(json.dumps('true'))
 
-@login_required(login_url='/admins/login/')
+@login_required()
 def adminabout(request):
     if request.method == 'GET':
         return render(request, 'admins/editabout.html',
@@ -245,7 +244,7 @@ def adminabout(request):
             blogmodels.Setting.objects.create(body=request.POST.get('editormd-markdown-doc')).save()
         return HttpResponseRedirect("/admins/adminabout/")
 
-@login_required(login_url='/admins/login/')
+@login_required
 def getabout(request):
     try:
         article_body = blogmodels.Setting.objects.get().body
@@ -253,13 +252,13 @@ def getabout(request):
         article_body=''
     return HttpResponse(article_body)
 
-@login_required(login_url='/admins/login/')
+@login_required
 def addseries(request):
     if request.method == 'POST':
         blogmodels.Series.objects.create(name=request.POST.get('series'))
         return HttpResponseRedirect("/admins/addarticle")
 
-@login_required(login_url='/admins/login/')
+@login_required
 def adminweixin(request):
     if request.method == 'GET':
         Keywords3 =[]
@@ -277,13 +276,13 @@ def adminweixin(request):
                                           content=json.dumps(request.POST.get('content')))
     return HttpResponseRedirect("/admins/adminweixin/")
 
-@login_required(login_url='/admins/login/')
+@login_required
 def delwkey(request):
     if request.method == 'POST':
         blogmodels.KeyWord.objects.get(id=request.POST.get('modify')).delete()
         return HttpResponse(json.dumps('true'))
 
-@login_required(login_url='/admins/login/')
+@login_required
 def wxreply(request):
     if request.method == 'GET':
         Keywords3 = []
@@ -299,13 +298,13 @@ def wxreply(request):
         blogmodels.wxreply.objects.create(content=json.dumps(request.POST.get('content')))
     return HttpResponseRedirect("/admins/wxreply/")
 
-@login_required(login_url='/admins/login/')
+@login_required
 def delreply(request):
     if request.method == 'POST':
         blogmodels.wxreply.objects.get(id=request.POST.get('modify')).delete()
         return HttpResponse(json.dumps('true'))
 
-@login_required(login_url='/admins/login/')
+@login_required
 def wxinstruction(request):
     if request.method == 'GET':
         Keywords3 = []
@@ -324,7 +323,7 @@ def wxinstruction(request):
     return HttpResponseRedirect("/admins/wxinstruction/")
 
 
-@login_required(login_url='/admins/login/')
+@login_required
 def delinstruction(request):
     if request.method == 'POST':
         blogmodels.wxsetting.objects.get(id=request.POST.get('modify')).delete()

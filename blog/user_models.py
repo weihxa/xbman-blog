@@ -51,16 +51,12 @@ class UserProfile(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     token = models.CharField(u'token', max_length=128, default=None, blank=True, null=True)
     department = models.CharField(u'部门', max_length=32, default=None, blank=True, null=True)
-    # business_unit = models.ManyToManyField(BusinessUnit)
     tel = models.CharField(u'座机', max_length=32, default=None, blank=True, null=True)
     mobile = models.CharField(u'手机', max_length=32, default=None, blank=True, null=True)
-
     memo = models.TextField(u'备注', blank=True, null=True, default=None)
     date_joined = models.DateTimeField(blank=True, auto_now_add=True)
-    # valid_begin = models.DateTimeField(blank=True, auto_now=True)
     valid_begin_time = models.DateTimeField(default=django.utils.timezone.now)
     valid_end_time = models.DateTimeField(blank=True, null=True)
-
     objects = UserProfileManager()
 
     USERNAME_FIELD = 'email'

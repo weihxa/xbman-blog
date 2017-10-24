@@ -102,7 +102,7 @@ USE_L10N = True
 
 USE_TZ = False
 
-LOGIN_URL = '/login/'
+LOGIN_URL = '/admins/login/'
 
 SESSION_COOKIE_AGE = 60*240
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True

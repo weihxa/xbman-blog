@@ -36,7 +36,6 @@ class Article(models.Model):
     description = models.TextField(u'描述',)
     body = models.TextField(u'正文',)
     created_time = models.DateTimeField(u'创建时间',auto_now_add=True)
-    # release_time = models.DateTimeField(default='1970-1-1 00:00:00')
     status = models.CharField(u'状态',default=0, max_length=1, choices=STATUS_CHOICES)
     category = models.CharField(u'类别',default=0, max_length=1, choices=CATEGORY_CHOICES)
     read = models.IntegerField(u'阅读数',default=0)
