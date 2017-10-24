@@ -44,6 +44,7 @@ class Migration(migrations.Migration):
                 ('body', models.TextField(verbose_name='\u6b63\u6587')),
                 ('created_time', models.DateTimeField(auto_now_add=True, verbose_name='\u521b\u5efa\u65f6\u95f4')),
                 ('status', models.CharField(default=0, max_length=1, verbose_name='\u72b6\u6001', choices=[(b'0', b'\xe5\x8f\x91\xe5\xb8\x83'), (b'1', b'\xe5\xad\x98\xe7\xa8\xbf')])),
+                ('category', models.CharField(default=0, max_length=1, verbose_name='\u7c7b\u522b', choices=[(b'0', b'\xe5\x8e\x9f\xe5\x88\x9b'), (b'1', b'\xe8\xbd\xac\xe8\xbd\xbd')])),
                 ('read', models.IntegerField(default=0, verbose_name='\u9605\u8bfb\u6570')),
                 ('author', models.ForeignKey(verbose_name='\u4f5c\u8005', to=settings.AUTH_USER_MODEL, null=True)),
             ],
