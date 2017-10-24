@@ -31,14 +31,16 @@ def login(request):
         user = auth.authenticate(username=username,password=password)
         if user is not None:
             if user.valid_end_time: #设置了end time
-                if django.utils.timezone.now() > user.valid_begin_time and django.utils.timezone.now()  < user.valid_end_time:
+                if django.utils.timezone.now() > user.valid_begin_time and \
+                                django.utils.timezone.now()  < user.valid_end_time:
                     auth.login(request,user)
                     if code == request.session.get('check_code', 'error'):
                         return HttpResponseRedirect('/admins/index/')
                     else:
                         return render(request, 'admins/login.html', {'login_err': '您输入的验证码错误,请重新输入！'})
                 else:
-                    return render(request,'admins/login.html',{'login_err': 'User account is expired,please contact your IT guy for this!'})
+                    return render(request,'admins/login.html',
+                                  {'login_err': 'User account is expired,please contact your IT guy for this!'})
             elif django.utils.timezone.now() > user.valid_begin_time:
                     auth.login(request,user)
                     if code == request.session.get('check_code', 'error'):
@@ -93,10 +95,11 @@ def addarticle(request):
         d = dict(request.POST)
         title = d['title'][0]
         status = d['status'][0]
+        category = d['category'][0]
         editormd = d['editormd-markdown-doc'][0]
         description = editormd.split('---')[0]
         series = request.POST.get('series')
-        print request.user
+        print category
         try:
             tags = d['tags']
         except KeyError:
@@ -111,7 +114,10 @@ def addarticle(request):
             article.title = title
             article.body = editormd
             article.status = status
+            article.category = category
             article.description = description
+            users = UserProfile.objects.get(email=str(request.user))
+            article.author = users
             exist_tag = d['exist_tag'][0].split(',')
             old_tag = article.get_tag().strip(',').split(',')
             tags = list(set(tags).difference(set(exist_tag)))
@@ -127,8 +133,9 @@ def addarticle(request):
                 t = blogmodels.Categories.objects.get(name=dc)
                 article.categories.remove(t)
         except Exception,e:
-            article = blogmodels.Article.objects.create(title=title, body=editormd, status=status,
-                                             description=description)
+            users = UserProfile.objects.get(email=str(request.user))
+            article = blogmodels.Article.objects.create(title=title, body=editormd, status=status,category=category,
+                                             description=description,author=users)
             if status == 0:
                 article.release_time = timezone.now()
         if tags:
@@ -142,8 +149,6 @@ def addarticle(request):
         if series:
             c = blogmodels.Series.objects.get(id=series)
             article.series = c
-        users = UserProfile.objects.get(email=str(request.user))
-        article.author = users
         article.save()
         return HttpResponseRedirect("/admins/articlelist/")
 
@@ -216,7 +221,8 @@ def link(request):
         links = blogmodels.Link.objects.all().order_by('-add_time')
         return render(request, 'admins/link.html', {'links': links})
     if request.method == 'POST' and request.POST.get('urls'):
-        blogmodels.Link.objects.create(name=request.POST.get('name'),url=request.POST.get('urls'),description=request.POST.get('Description'))
+        blogmodels.Link.objects.create(name=request.POST.get('name'),url=request.POST.get('urls'),
+                                       description=request.POST.get('Description'))
     return HttpResponseRedirect("/admins/link/")
 
 @login_required(login_url='/admins/login/')
@@ -267,7 +273,8 @@ def adminweixin(request):
             Keywords3.append(Keywords2)
         return render(request, 'admins/wechat.html', {'Keywords': Keywords3})
     if request.method == 'POST':
-        blogmodels.KeyWord.objects.create(keyword=request.POST.get('keyword'), content=json.dumps(request.POST.get('content')))
+        blogmodels.KeyWord.objects.create(keyword=request.POST.get('keyword'),
+                                          content=json.dumps(request.POST.get('content')))
     return HttpResponseRedirect("/admins/adminweixin/")
 
 @login_required(login_url='/admins/login/')

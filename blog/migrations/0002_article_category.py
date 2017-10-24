@@ -2,8 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import datetime
-from django.conf import settings
 
 
 class Migration(migrations.Migration):
@@ -15,8 +13,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='article',
-            name='author',
-            field=models.ForeignKey(default=datetime.datetime(2017, 10, 19, 11, 43, 55, 142000), verbose_name='\u4f5c\u8005', to=settings.AUTH_USER_MODEL),
-            preserve_default=False,
+            name='category',
+            field=models.CharField(default=0, max_length=1, verbose_name='\u7c7b\u522b', choices=[(b'0', b'\xe5\x8e\x9f\xe5\x88\x9b'), (b'1', b'\xe8\xbd\xac\xe8\xbd\xbd')]),
         ),
     ]

@@ -5,7 +5,17 @@
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"2","bdPos":"left","bdTop":"208.5"},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
         <section class="section">
         <div class="container">
+
             <article class="card blog">
+                <div style="float: right;position: relative;">
+                    <h3>
+                        {% if article.category == '0' %}
+                            <span class="label label-info">原创</span>
+                        {% elif article.category == '1' %}
+                            <span class="label label-warning">转载</span>
+                        {% endif %}
+                    </h3>
+                </div>
                 <div class="card__header">
                     <h1 style="font-size: 19px">{{ article.title }}</h1>
                     <small>
@@ -71,7 +81,7 @@
                     <script type="text/javascript">var jd_union_unid="1000244035",jd_ad_ids="505:6",jd_union_pid="CK2q3vHyKxDDhvrcAxoAIPbl4/UDKgA=";var jd_width=960;var jd_height=90;var jd_union_euid="";var p="AhMDVhlaHAESBWVEH0hfIlgRRgYlXVZaCCsfSlpMWGVEH0hfIlAXQBNDYWEZNVsLfWpXBVdDHF5HQWdZF2scARoAVB1bEAoiB1QaWhYHFwZXH2slXVZaCCsQewMiWBFGBiUCFgZcGVocChIDURpZJQMiN2U%3D";</script><script type="text/javascript" charset="utf-8" src="//u-x.jd.com/static/js/auto.js"></script>
                 </div>
                 <div>
-<a data-type="3" data-tmpl="800x90" data-tmplid="195" data-rd="2" data-style="2" data-border="1" href="#"></a>
+                    <a data-type="3" data-tmpl="800x90" data-tmplid="195" data-rd="2" data-style="2" data-border="1" href="#"></a>
                 </div>
 
             </div>
@@ -117,7 +127,7 @@
 {% endblock %}
 {% block js %}
     <script>
-$(function () {
+        $(function () {
             var testEditormdView2;
             testEditormdView2 = editormd.markdownToHTML("test-editormd-view2", {
                 htmlDecode: "style,script,iframe",

@@ -52,7 +52,8 @@ def as_view(request,article_url):
     article.save()
     url = 'http://' + request.get_host() + request.get_full_path()
     series = models.Series.objects.all()
-    return render(request, 'article.html',{'article': article,"url":url,'series':series,'theme':utils.setsession(request)},
+    return render(request, 'article.html',{'article': article,"url":url,
+                                           'series':series,'theme':utils.setsession(request)},
                   context_instance=RequestContext(request))
 
 

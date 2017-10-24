@@ -37,6 +37,19 @@
                                         </select>
                                     </div>
                                 </div>
+                            <div class="col-xs-1">
+                                    <div class="form-group">
+                                        <select class="form-control" name="category">
+                                            {% if article.category == '0' %}
+                                                <option value="0">原创</option>
+                                                <option value="1">转载</option>
+                                            {% elif article.category == '1' %}
+                                                <option value="1">转载</option>
+                                                <option value="0">原创</option>
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-xs-6">
                                     <input type="text" class="form-control" name="url" placeholder="URL" value="{{ article.url }}">
                                 </div>

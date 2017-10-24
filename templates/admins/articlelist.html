@@ -27,6 +27,7 @@
                                     <th>阅读数</th>
                                     <th>评论数</th>
                                     <th>状态</th>
+                                    <th>类别</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
@@ -43,6 +44,13 @@
                                                 <span class="label label-info">发布</span>
                                             {% elif article.status == '1' %}
                                                 <span class="label label-danger">存稿</span>
+                                            {% endif %}
+                                        </td>
+                                    <td>
+                                            {% if article.category == '0' %}
+                                                <span class="label label-info">原创</span>
+                                            {% elif article.category == '1' %}
+                                                <span class="label label-danger">转载</span>
                                             {% endif %}
                                         </td>
                                         <td>
