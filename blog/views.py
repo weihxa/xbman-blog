@@ -32,7 +32,7 @@ def index(request):
     if seriess:
         S = models.Series.objects.get(name=seriess)
         articles = articles.filter(series=S)
-    paginator = Paginator(articles, 10, request=request)
+    paginator = Paginator(articles, 20, request=request)
     try:
         articles = paginator.page(page)
     except PageNotAnInteger:
